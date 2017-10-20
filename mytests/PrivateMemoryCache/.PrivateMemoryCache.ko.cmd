@@ -1,0 +1,1 @@
+cmd_/home/junhuawa/LFD5420/PrivateMemoryCache/PrivateMemoryCache.ko := ld -r -m elf_x86_64 -T /usr/src/kernels/3.10.0-327.22.2.el7.x86_64/scripts/module-common.lds --build-id  -o /home/junhuawa/LFD5420/PrivateMemoryCache/PrivateMemoryCache.ko /home/junhuawa/LFD5420/PrivateMemoryCache/PrivateMemoryCache.o /home/junhuawa/LFD5420/PrivateMemoryCache/PrivateMemoryCache.mod.o

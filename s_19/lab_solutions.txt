@@ -1,0 +1,166 @@
+CHAPTER 9 & 10  -  LAB:Q0:  Find out how long a printk takes - how long takes a trace_printk ? Compare the values.    HINT: use trivial.c to start with for printk/trace_printk A0: - 0.075 usprintk (perf):Method 2:echo function_graph > current_tracerecho printk > set_ftrace_filterrun insmod and search trace output for the printk occuring after insmodoutput ->1)   <...>-3991   =>  insmod-9453 ------------------------------------------ 1)   3.295 us    |  printk();#better:echo "" > set_ftrace_filterecho printk > set_graph_function 4536.386531 |    7)               |  printk() { 4536.386531 |    7)               |    vprintk() { 4536.386531 |    7)               |      _raw_spin_lock() { 4536.386531 |    7)   0.051 us    |        add_preempt_count(); 4536.386531 |    7)   0.387 us    |      } 4536.386532 |    7)   0.050 us    |      log_prefix(); 4536.386532 |    7)   0.043 us    |      emit_log_char(); 4536.386533 |    7)   0.040 us    |      emit_log_char(); 4536.386533 |    7)   0.040 us    |      emit_log_char(); 4536.386533 |    7)   0.043 us    |      emit_log_char();
+ 4536.386534 |    7)   0.040 us    |      emit_log_char();
+ 4536.386534 |    7)   0.040 us    |      emit_log_char();
+ 4536.386534 |    7)   0.040 us    |      emit_log_char();
+ 4536.386535 |    7)   0.040 us    |      emit_log_char();
+ 4536.386535 |    7)   0.042 us    |      emit_log_char();
+ 4536.386535 |    7)   0.041 us    |      emit_log_char();
+ 4536.386536 |    7)   0.043 us    |      emit_log_char();
+ 4536.386536 |    7)   0.040 us    |      emit_log_char();
+ 4536.386536 |    7)   0.042 us    |      emit_log_char();
+ 4536.386537 |    7)   0.042 us    |      emit_log_char();
+ 4536.386537 |    7)   0.041 us    |      emit_log_char();
+ 4536.386537 |    7)   0.040 us    |      emit_log_char();
+ 4536.386538 |    7)   0.043 us    |      emit_log_char();
+ 4536.386538 |    7)   0.041 us    |      emit_log_char();
+ 4536.386538 |    7)   0.042 us    |      emit_log_char();
+ 4536.386539 |    7)   0.040 us    |      emit_log_char();
+ 4536.386539 |    7)   0.043 us    |      emit_log_char();
+ 4536.386539 |    7)   0.041 us    |      emit_log_char();
+ 4536.386540 |    7)   0.041 us    |      emit_log_char();
+ 4536.386540 |    7)   0.041 us    |      emit_log_char();
+ 4536.386540 |    7)   0.040 us    |      emit_log_char();
+ 4536.386541 |    7)   0.041 us    |      emit_log_char();
+ 4536.386541 |    7)   0.040 us    |      emit_log_char();
+ 4536.386541 |    7)               |      console_trylock() {
+ 4536.386541 |    7)               |        down_trylock() {
+ 4536.386542 |    7)               |          _raw_spin_lock_irqsave() {
+ 4536.386542 |    7)   0.053 us    |            add_preempt_count();
+ 4536.386542 |    7)   0.373 us    |          }
+ 4536.386542 |    7)               |          _raw_spin_unlock_irqrestore() {
+ 4536.386542 |    7)   0.051 us    |            sub_preempt_count();
+ 4536.386543 |    7)   0.382 us    |          }
+ 4536.386543 |    7)   1.347 us    |        }
+ 4536.386543 |    7)   1.669 us    |      }
+ 4536.386543 |    7)               |      _raw_spin_unlock() {
+ 4536.386543 |    7)   0.049 us    |        sub_preempt_count();
+ 4536.386544 |    7)   0.363 us    |      }
+ 4536.386544 |    7)               |      console_unlock() {
+ 4536.386544 |    7)               |        _raw_spin_lock_irqsave() {
+ 4536.386544 |    7)   0.052 us    |          add_preempt_count();
+ 4536.386545 |    7)   0.375 us    |        }
+ 4536.386545 |    7)               |        _raw_spin_unlock() {
+ 4536.386545 |    7)   0.053 us    |          sub_preempt_count();
+ 4536.386545 |    7)   0.366 us    |        }
+ 4536.386545 |    7)   0.062 us    |        log_prefix();
+ 4536.386546 |    7)   0.040 us    |        _call_console_drivers();
+ 4536.386546 |    7)   0.039 us    |        _call_console_drivers();
+ 4536.386546 |    7)               |        _raw_spin_lock_irqsave() {
+ 4536.386547 |    7)   0.052 us    |          add_preempt_count();
+ 4536.386547 |    7)   0.380 us    |        }
+ 4536.386547 |    7)               |        _raw_spin_unlock() {
+ 4536.386547 |    7)   0.053 us    |          sub_preempt_count();
+ 4536.386548 |    7)   0.364 us    |        }
+ 4536.386548 |    7)               |        up() {
+ 4536.386548 |    7)               |          _raw_spin_lock_irqsave() {
+ 4536.386548 |    7)   0.052 us    |            add_preempt_count();
+ 4536.386548 |    7)   0.375 us    |          }
+ 4536.386549 |    7)               |          _raw_spin_unlock_irqrestore() {
+ 4536.386549 |    7)   0.065 us    |            sub_preempt_count();
+ 4536.386549 |    7)   0.388 us    |          }
+ 4536.386549 |    7)   1.351 us    |        }
+ 4536.386549 |    7)               |        _raw_spin_lock() {
+ 4536.386550 |    7)   0.049 us    |          add_preempt_count();
+ 4536.386550 |    7)   0.370 us    |        }
+ 4536.386550 |    7)               |        _raw_spin_unlock_irqrestore() {
+ 4536.386550 |    7)   0.053 us    |          sub_preempt_count();
+ 4536.386551 |    7)   0.399 us    |        }
+ 4536.386551 |    7)   6.707 us    |      }
+ 4536.386551 |    7) + 20.001 us   |    }
+ 4536.386551 |    7) + 20.315 us   |  }
+ 4536.962509 |    5)               |        up() {
+ 4536.962510 |    5)               |          _raw_spin_lock_irqsave() {
+ 4536.962510 |    5)   0.050 us    |            add_preempt_count();
+ 4536.962510 |    5)   0.373 us    |          }
+ 4536.962510 |    5)               |          _raw_spin_unlock_irqrestore() {
+ 4536.962510 |    5)   0.052 us    |            sub_preempt_count();
+ 4536.962511 |    5)   0.377 us    |          }
+ 4536.962511 |    5)   1.360 us    |        }
+ 4536.962511 |    5)               |        _raw_spin_lock() {
+ 4536.962511 |    5)   0.049 us    |          add_preempt_count();
+ 4536.962512 |    5)   0.391 us    |        }
+ 4536.962512 |    5)               |        _raw_spin_unlock_irqrestore() {
+ 4536.962512 |    5)   0.054 us    |          sub_preempt_count();
+ 4536.962512 |    5)   0.401 us    |        }
+ 4536.962512 |    5)   7.380 us    |      } /* console_unlock */
+ 4536.962513 |    5) + 33.080 us   |    } /* vprintk */
+ 4536.962513 |    5) + 33.509 us   |  } /* printk */
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^   .... 33us to finish prink   and big variation for subsequent runs.
+trace_printk is about 300ns (indirect measurement with ktime_get() ). Thats  factor >=100 !!
+Using jiffies to measure before and after
+printk took: 0 jiffies
+trace_printk took: 0 jiffies
+Using getnstimeofday to measure before and after
+printk took: 2038 ns
+trace_printk took: 733 ns
+Using ktime_get to measure before and after
+printk took: 1932 ns
+trace_printk took: 583 ns
+Q1:   How often does the CPU(s) change c-states in  1 second    (average value across at least 3 measurements)
+
+    Write down your trace-cmd command-line(s).
+
+    Go to console mode (init 1 - Instructor can assis t) and repeat the task. 
+
+    Compare the values.
+
+    approx avg 730 running full desktop; 78 in console mode
+
+         cmd line:  perf record -a -e power:cpu_idle sleep 1 ; perf report
+
+    combined:
+
+    perf stat -r 3 -a -e "power:cpu_idle" sleep 1
+
+Q2:  How often does the CPU(s) change p-states  in  1 second   (average value across at least 3 measurements)
+
+    Write down your trace-cmd command-line(s).
+
+    Go to console mode (init 1 - Instructor can assist) and repeat the task.
+
+    Compare the values.
+
+    avg 3 running full desktop, 0 in console mode
+
+         cmd line:  perf record -a -e power:cpu_frequency sleep 1 ; perf report
+
+Q3:  How often do timers occur  in  1 second (average value across at least 3 measurements)
+
+    Track the number of timer setup (init)
+
+    Track the number of timer expires
+
+    Track the number of timers being cancelled
+
+    Compare the numbers
+
+    avg running full desktop:
+
+    ~6 init
+
+    ~50 expires
+
+    ~70 cancelled
+
+         cmd line: perf record -a -e timer:timer_init -e timer:timer_expire_entry -e timer:timer_cancel sleep 1 ; perf report
+
+Q4:  How often do hr-timers occur in 1 second (average value across at least 3 measurements)
+
+    Track the number of timer setup (init)
+
+    Track the number of timer expires
+
+    Track the number of timers being cancelled
+
+    Compare the numbers
+
+    avg running full desktop:
+
+    ~150 init
+
+    ~165 expires
+
+    ~600 cancelled
+
+         cmd line: perf record -a -e timer:hrtimer_init -e timer:hrtimer_expire_entry -e timer:hrtimer_cancel sleep 1 ; perf report
+

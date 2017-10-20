@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define SIZE 1024*5
+
+int main(void)
+{
+    char *ptr;
+    ptr = malloc(SIZE);
+    getchar();
+
+    memset(ptr, '\0', SIZE);
+
+    free(ptr);
+
+    getchar();
+    return 0;
+}

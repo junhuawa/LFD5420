@@ -1,0 +1,1 @@
+cmd_/home/test/LFT/LFD5420/SOLUTIONS/module2/trivial2.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/test/LFT/LFD5420/SOLUTIONS/module2/trivial2.ko /home/test/LFT/LFD5420/SOLUTIONS/module2/trivial2.o /home/test/LFT/LFD5420/SOLUTIONS/module2/trivial2.mod.o
